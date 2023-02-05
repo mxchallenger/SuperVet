@@ -34,11 +34,15 @@
     <None Remove="Microsoft.EntityFrameworkCore.Design" />
     <None Remove="Microsoft.EntityFrameworkCore.Relational" />
     <None Remove="Microsoft.Extensions.DependencyInjection" />
+    <None Remove="Data\Filters\" />
+    <None Remove="Data\Database\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mapper\" />
     <Folder Include="Models\" />
     <Folder Include="DTOs\" />
     <Folder Include="Services\" />
+    <Folder Include="Data\Filters\" />
+    <Folder Include="Data\Database\" />
   </ItemGroup>
 </Project>

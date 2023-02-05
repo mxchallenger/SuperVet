@@ -9,34 +9,6 @@ namespace SuperVet.Controllers
 
     public class PatientController : ControllerBase
     {
-        private static List<Patient> patients = new List<Patient>
-        {
-            new Patient {
-                Id = 1,
-                Type ="Dog",
-                Name = "Bailey",
-                Sex = "Female",
-                Birthdate = "Jan 29, 2006",
-                Age = 15,
-                Altered = "altered",
-                MicrochipId = "000000",
-                DateCreated = new DateTime(2001, 08, 10),
-                DateModified = null,          
-            },
-            new Patient {
-                Id = 2,
-                Type ="Panda",
-                Name = "Mei Mei",
-                Sex = "Female",
-                Birthdate = "Feb 20, 2006",
-                Age = 15,
-                Altered = "unaltered",
-                DateCreated = new DateTime(2022, 08, 10),
-                DateModified = null,
-            },
-
-        };
-
         private readonly IPatientService _patientService;
         private readonly ILogger<PatientController> _logger;
         private readonly IMapper _mapper;
@@ -51,17 +23,43 @@ namespace SuperVet.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PatientDTO>>> GetPatients()
         {
+            _logger.LogInformation("Request received for GetPatients");
+
             var patients = await _patientService.GetPatients();
             var patientDTOs = _mapper.Map<IEnumerable<PatientDTO>>(patients);
 
             return Ok(patientDTOs);
         }
+        [HttpGet("{id}")]
+        public ActionResult<PatientDTO> GetPatientById(int id)
+        {
+            _logger.LogInformation($"Request received for GetPatientByIdAsync for id: {id}");
 
-        // TODO: [HttpPost]
+            var patient = _patientService.GetPatientByIdAsync(id).Result;
+            var patientDTO = _mapper.Map<PatientDTO>(patient);
+
+            return Ok(patientDTO);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreatePatientAsync([FromBody] PatientDTO newPatientObj)
+        {
+            var newPatient = _mapper.Map<Patient>(newPatientObj);
+
+            _logger.LogInformation("Request received for CreatePatientAsync");
+
+            var patient = await _patientService.CreatePatientAsync(newPatient);
+            var patientDTO = _mapper.Map<PatientDTO>(patient);
+
+            return Created("/patients", patientDTO);
+        }
+
 
         // TODO: [HttpPut]
+        //[HttpPut]
 
         // TODO: [HttpDelete]
+        //[HttpDelete]
     }
 }
 

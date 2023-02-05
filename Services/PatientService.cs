@@ -1,4 +1,5 @@
 ﻿using SuperVet.Data;
+using SuperVet.Data.Filters;
 
 namespace SuperVet.Services
 {
@@ -13,9 +14,28 @@ namespace SuperVet.Services
 
 		public async Task<IEnumerable<Patient>> GetPatients()
 		{
-			return await _ctx.Patients.OrderBy(p => p.Id).ToListAsync();
+			return await _ctx.Patients
+                .AsNoTracking()
+                .OrderBy(p => p.Id)
+                .ToListAsync();
 		}
 
-	}
+        public async Task<Patient> GetPatientByIdAsync(int patientId)
+        {
+            return await _ctx.Patients
+                   .AsNoTracking()
+                   .WherePatientIdEquals(patientId)
+                   //.Include(patient => patient.Encounters) includes the encounters collection
+                   .SingleOrDefaultAsync();
+        }
+
+        public async Task<Patient> CreatePatientAsync(Patient patient)
+        {
+            _ctx.Patients.Add(patient);
+            await _ctx.SaveChangesAsync();
+
+            return patient;
+        }
+    }
 }
 
