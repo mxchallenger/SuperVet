@@ -17,7 +17,7 @@ namespace SuperVet
 
 		//TODO get patient health issues list
 
-		public bool Altered { get; set; }
+		public string? Altered { get; set; }
 
 		//TODO get patient owner information
 

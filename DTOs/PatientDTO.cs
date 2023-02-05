@@ -13,7 +13,7 @@ namespace SuperVet.DTOs
 
         public byte Age { get; set; }
 
-        public bool Altered { get; set; }
+        public string Altered { get; set; }
 
         public string? MicrochipId { get; set; }
     }

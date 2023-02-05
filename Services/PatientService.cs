@@ -4,9 +4,9 @@ namespace SuperVet.Services
 {
 	public class PatientService : IPatientService
 	{
-		private readonly IDataContext _ctx;
+		private readonly VetContext _ctx;
 
-		public PatientService(IDataContext ctx)
+		public PatientService(VetContext ctx)
 		{
             _ctx = ctx;
 		}
