@@ -63,7 +63,6 @@ namespace SuperVet.Data
         private string GetFirst() => _patientFirst[_rand.Next(0, _patientFirst.Count)];
         private string GetAnimalType() => _patientAnimalType[_rand.Next(0, _patientAnimalType.Count)];
         private string GetSex() => _patientSex[_rand.Next(0, _patientSex.Count)];
-        private byte GetAge() => (byte)_rand.Next(0, 17);
         private string GetAltered() => _patientAltered[_rand.Next(0, _patientAltered.Count)];
 
         private string GetRandomBirthdate()
@@ -89,28 +88,6 @@ namespace SuperVet.Data
         // TODO: Add to model:
         // private int GetWeight() => _rand.Next(125, 350);
 
-
-
-        /// <summary>
-        /// Generates a number of random patients based on input.
-        /// </summary>
-        /// <param name="numberOfPatients">The number of random review to generate.</param>
-        /// <returns>A list of random products.</returns>
-
-
-        /*public List<Patient> GenerateRandomPatients(int numberOfPatients)
-        {
-
-            var patientList = new List<Patient>();
-
-            for (var i = 0; i < numberOfPatients; i++)
-            {
-                patientList.Add(CreateRandomPatient(i + 1));
-            }
-
-            return patientList;
-        }*/
-
         public List<Patient> GetPatients(int qty)
         {
             return Enumerable.Range(1, qty)
@@ -120,8 +97,6 @@ namespace SuperVet.Data
                 Name = GetFirst(),
                 Type = GetAnimalType(),
                 Sex = GetSex(),
-                Birthdate = GetRandomBirthdate(),
-                Age = GetAge(),
                 Altered = GetAltered(),
                 MicrochipId = GetMicrochipId(),
                 DateCreated = DateTime.UtcNow,
@@ -129,24 +104,6 @@ namespace SuperVet.Data
             })
             .ToList();
         }
-
-        /*public Patient CreateRandomPatient(int id)
-        {
-            var patient = new Patient();
-
-            patient.Id = id;
-            patient.Name = GetFirst();
-            patient.Type = GetAnimalType();
-            patient.Sex = GetSex();
-            patient.Birthdate = GetRandomBirthdate();
-            patient.Age = GetAge();
-            patient.Altered = GetAltered();
-            patient.MicrochipId = GetMicrochipId();
-            patient.DateCreated = DateTime.UtcNow;
-            patient.DateModified = DateTime.UtcNow;
-
-            return patient;
-        }*/
 
         private string RandomString(int size, bool lowerCase = false)
         {

@@ -15,9 +15,9 @@ namespace SuperVet.DTOs
 
         public string? Sex { get; set; }
 
-        public string? Birthdate { get; set; }
+        public DateTime Birthdate { get; set; }
 
-        public byte Age { get; set; }
+        public int Age { get; }
 
         public string? Altered { get; set; }
 

@@ -10,9 +10,8 @@ namespace SuperVet.Services
 	public class PatientService : IPatientService
 	{
 		private readonly VetContext _ctx;
-        private readonly IMapper _mapper;
 
-		public PatientService(VetContext ctx, IMapper mapper)
+		public PatientService(VetContext ctx)
 		{
             _ctx = ctx;
 		}
@@ -58,10 +57,8 @@ namespace SuperVet.Services
             patient.DateModified = DateTime.UtcNow;
             patient.Name = newPatient.Name;
             patient.Type = newPatient.Type;
-            patient.Age = newPatient.Age;
             patient.Sex = newPatient.Sex;
             patient.Birthdate = newPatient.Birthdate;
-            patient.Age = newPatient.Age;
             patient.Altered = newPatient.Altered;
             patient.MicrochipId = newPatient.MicrochipId;
 

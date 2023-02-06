@@ -10,11 +10,22 @@ namespace SuperVet
 
 		public string? Sex { get; set; }
 
-		public string? Birthdate { get; set; }
+		public DateTime Birthdate { get; set; }
 
-		//TODO get birthdate, calculate age, set age
-		public byte Age { get; set; }
-
+		public int Age
+		{
+			get
+			{
+				var today = DateTime.Today;
+				var age = today.Year - Birthdate.Year;
+				if (Birthdate > today.AddYears(-age))
+				{
+					age--;
+				}
+				return age;
+			}
+		}
+		//TODO add weight to model
 		//TODO get patient health issues list
 
 		public string? Altered { get; set; }
