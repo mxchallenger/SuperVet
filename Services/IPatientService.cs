@@ -9,6 +9,10 @@ namespace SuperVet.Services
         Task<Patient>GetPatientByIdAsync(int id);
 
         Task<Patient>CreatePatientAsync(Patient newPatient);
+
+        Task<Patient> UpdatePatientByIdAsync(Patient patient, int patientId);
+
+        Task DeletePatientByIdAsync(int id);
     }
 }
 

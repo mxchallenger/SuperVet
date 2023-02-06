@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using AutoMapper;
 using SuperVet.DTOs;
 
@@ -31,11 +33,11 @@ namespace SuperVet.Controllers
             return Ok(patientDTOs);
         }
         [HttpGet("{id}")]
-        public ActionResult<PatientDTO> GetPatientById(int id)
+        public async Task<ActionResult<PatientDTO>> GetPatientById(int id)
         {
             _logger.LogInformation($"Request received for GetPatientByIdAsync for id: {id}");
 
-            var patient = _patientService.GetPatientByIdAsync(id).Result;
+            var patient = await _patientService.GetPatientByIdAsync(id);
             var patientDTO = _mapper.Map<PatientDTO>(patient);
 
             return Ok(patientDTO);
@@ -54,12 +56,38 @@ namespace SuperVet.Controllers
             return Created("/patients", patientDTO);
         }
 
+        [HttpPut("{id}")]
+        public async Task<ActionResult<PatientDTO>> UpdatePatientByIdAsync(Patient patient, int id)
+        {
+            _logger.LogInformation("Request received for UpdatePatientByIdAsync");
+            try
+            {
+                var updatedPatient = await _patientService.UpdatePatientByIdAsync(patient, id);
+                var patientDTO = _mapper.Map<PatientDTO>(updatedPatient);
+                return Ok(updatedPatient);
+            }
+            catch (System.ArgumentNullException)
+            {
+                return NotFound($"No patient with ID: {id} exists in the database");
+            }
+        }
 
-        // TODO: [HttpPut]
-        //[HttpPut]
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<PatientDTO>> DeletePatient(int id)
+        {
+            _logger.LogInformation("Request received for DeletePatient");
 
-        // TODO: [HttpDelete]
-        //[HttpDelete]
+            try
+            {
+                await _patientService.DeletePatientByIdAsync(id);
+                return Ok();
+
+            }
+            catch (Exception)
+            {
+                return NotFound();
+
+            }
+        }
     }
 }
-

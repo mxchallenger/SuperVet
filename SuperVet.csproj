@@ -36,6 +36,8 @@
     <None Remove="Microsoft.Extensions.DependencyInjection" />
     <None Remove="Data\Filters\" />
     <None Remove="Data\Database\" />
+    <None Remove="Utilities\" />
+    <None Remove="Utilities\HttpResponseExceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mapper\" />
@@ -44,5 +46,7 @@
     <Folder Include="Services\" />
     <Folder Include="Data\Filters\" />
     <Folder Include="Data\Database\" />
+    <Folder Include="Utilities\" />
+    <Folder Include="Utilities\HttpResponseExceptions\" />
   </ItemGroup>
 </Project>
