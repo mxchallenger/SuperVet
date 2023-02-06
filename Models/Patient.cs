@@ -26,7 +26,8 @@ namespace SuperVet
 			}
 		}
 		//TODO add weight to model
-		//TODO get patient health issues list
+		//TODO breed
+		//TODO get patient health issues notes
 
 		public string? Altered { get; set; }
 
@@ -34,6 +35,8 @@ namespace SuperVet
 
 		public string? MicrochipId { get; set; }
 
+		public int OwnerId { get; set; }
+		public Owner? Owner { get; set; }
 	}
 }
 

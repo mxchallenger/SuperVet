@@ -12,7 +12,12 @@ namespace SuperVet.Models
         public string? State { get; set; }
         public int? Postal { get; set; }
 
-        //TODO Add pets
+        public ICollection<Patient> Patients { get; set; }
+
+        public Owner()
+        {
+            Patients = new List<Patient>();
+        }
     }
 }
 

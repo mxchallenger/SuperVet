@@ -81,3 +81,9 @@ namespace SuperVet.Services
     }
 }
 
+/* TODO: Future Code Snippets: 
+ * var owner = _ctx.Owners
+ * .include(o => o.Patients)
+ * .FirstOrDefault(o => o.Id == ownerId);
+ * 
+ * var patients = owner.Patients */
